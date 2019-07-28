@@ -1,0 +1,57 @@
+button{
+    outline: none;
+}
+.pointer{
+    cursor: pointer;
+}
+.mt-30{
+    margin-top: 30px !important
+}
+.mr-15{
+    margin-right: 15px !important
+}
+.relative{
+    position: relative;
+}
+
+.main--input{
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: 1px solid #333;
+    width: 60%;
+}
+.bar {
+    width: 35px;
+    height: 3px;
+    background-color: black;
+    margin: 3px 0;
+}
+.MuiButton-label{
+    display: flex !important;
+    justify-content: center !important;
+    flex-direction: column !important;
+}
+.text-center{
+    text-align: center !important;
+}
+a{text-decoration:none !important; color: #333;}
+.titleLine{
+    background: #333;
+    height: 1px;
+    width: 30%;
+    margin: 0 auto;
+    border: none;
+}
+.flex-center{
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+.main--button{
+    border-radius: 50px;
+    border: 0px;
+    background: #313cb5;
+    color: #fff;
+    font-size: 18px;
+    padding: 7px 10px;
+}
