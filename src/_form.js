@@ -23,12 +23,7 @@ class Form extends Component {
     }
 
     handlePageChange(pageNumber, itemsPerPage) {  
-        // let aux = [];
         let item = this.state.result;
-        // for(let i = pageNumber-1; i<itemsPerPage; i++){
-        //     aux.push(item[i]);
-        // }
-        // console.log(item.slice(pageNumber-1, itemsPerPage));
         let mult = (parseInt(pageNumber)*itemsPerPage)-itemsPerPage;
         this.setState({
             activePage: pageNumber,
@@ -88,10 +83,10 @@ class Form extends Component {
 
 
     render(){
-        if(this.state.page.length > 0){
-            let page = this.state.page;
-            this.state.result = page;
-        }
+        // if(this.state.page.length > 0){
+        //     let page = this.state.page;
+        //     this.state.result = page;
+        // }
         return (
             <div className="text-center mt-30">
                 <form className="commentForm flex-center" >
