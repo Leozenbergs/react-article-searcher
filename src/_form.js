@@ -45,6 +45,7 @@ class Form extends Component {
     
     handleSubmit = () => {
         try{
+            this.setState({result: []});
             let res = [];
             let query = document.getElementById('query').value;
             axios.get(`https://core.ac.uk:443/api-v2/search/${query}?page=1&pageSize=15&apiKey=f2W8igzCQvP6V0cpnGAh73uEb5tFNKrY`)
