@@ -13,6 +13,7 @@ class Form extends Component {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handlePageChange = this.handlePageChange.bind(this);
+        this.handleFavs = this.handleFavs.bind(this);
         this.state = {
             pesquisa: '',
             result: [],
@@ -25,8 +26,15 @@ class Form extends Component {
         this.setState({activePage: pageNumber});
     }
 
-    setPagination = () => {
-        console.log('teste');
+    handleFavs (e, id, title){
+        if(!e.target.classList.contains('active')){ 
+            e.target.classList.add('active');
+            localStorage.setItem(id, title);
+        }else{ 
+            e.target.classList.remove('active');
+            localStorage.removeItem(id);
+        }
+        
     }
     
     handleSubmit = () => {
@@ -35,7 +43,7 @@ class Form extends Component {
         axios.get(`https://core.ac.uk:443/api-v2/search/${this.pesquisa}?page=1&pageSize=10&apiKey=f2W8igzCQvP6V0cpnGAh73uEb5tFNKrY`)
         .then((response) => {
             response.data.data.forEach((each)=> {
-                console.log(each);
+                // console.log(each);
                 res.push({id: each._source.id, title: each._source.title, author: each._source.authors, type: each._type, description: each._source.description, urls: each._source.urls});                
             });
             this.setState({
@@ -46,7 +54,6 @@ class Form extends Component {
     }
 
     render(){
-        
 
         return (
             <div className="text-center mt-30">
@@ -62,8 +69,8 @@ class Form extends Component {
                 <div id="results">
                     <ol>
                     {this.state.result.map((each)=>
-                        <li className="text-left result--item" key={each.id}>
-                            <div className="fav r15 float-right relative t15"><i class="far fa-heart"></i></div>
+                        <li className="text-left result--item" onClick={(e) => this.handleFavs(e, each.title, each.title)} key={each.id}>
+                            <div className="fav r15 float-right relative t0"><i class="far fa-heart"></i></div>
                             <b>Title:</b>{each.title}<br/>
                             <b>Description:</b>{each.description}<br/>
                             <b>Authors:</b>{each.author}<br/>
