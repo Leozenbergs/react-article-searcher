@@ -46,7 +46,7 @@ export default function TemporaryDrawer() {
     >
       <List>
         {['Home','Favoritos'].map((text, index) => (
-          <Link to={(text == "Home")? '/': text}>
+          <Link to={(text === "Home")? '/': text}>
             <ListItem button key={text}>
             
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
