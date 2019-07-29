@@ -47,7 +47,7 @@ class Form extends Component {
         try{
             let res = [];
             let query = document.getElementById('query').value;
-            axios.get(`https://core.ac.uk:443/api-v2/search/${query}?page=1&pageSize=10&apiKey=f2W8igzCQvP6V0cpnGAh73uEb5tFNKrY`)
+            axios.get(`https://core.ac.uk:443/api-v2/search/${query}?page=1&pageSize=15&apiKey=f2W8igzCQvP6V0cpnGAh73uEb5tFNKrY`)
             .then((response) => {
                 response.data.data.forEach((each)=> {
                     res.push({id: each._source.id, title: each._source.title, author: each._source.authors, type: each._type, description: each._source.description, urls: each._source.urls});                
