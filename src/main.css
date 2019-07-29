@@ -31,10 +31,13 @@ button, input{
     justify-content: center !important;
     flex-direction: column !important;
 }
+.text-left{
+    text-align:left;
+}
 .text-center{
     text-align: center !important;
 }
-a{text-decoration:none !important; color: #333;}
+a:not(.listLink){text-decoration:none !important; color: #333;}
 .titleLine{
     background: #333;
     height: 1px;

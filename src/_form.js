@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './main.css';
 import axios from 'axios';
+import Link from 'react-router-dom/Link'
 
 // https://core.ac.uk:443/api-v2/search/city?page=1&pageSize=10&apiKey=f2W8igzCQvP6V0cpnGAh73uEb5tFNKrY
 
@@ -24,7 +25,7 @@ class Form extends Component {
         .then((response) => {
             response.data.data.forEach((each)=> {
                 console.log(each);
-                res.push({id: each._source.id,titulo: each._source.title, autor: each._source.authors});                
+                res.push({id: each._source.id, title: each._source.title, author: each._source.authors, type: each._type, description: each._source.description, urls: each._source.urls});                
             });
             this.setState({
                 result: res
@@ -51,9 +52,17 @@ class Form extends Component {
                 </form>
                 <div id="results">
                     <ol>
-                    {this.state.result.map((each, index)=>
-                        <li key={index}>
-                            {each.titulo}
+                    {this.state.result.map((each)=>
+                        <li className="text-left" key={each.id}>
+                            <b>Title:</b>{each.title}<br/>
+                            <b>Description:</b>{each.description}<br/>
+                            <b>Authors:</b>{each.author}<br/>
+                            <b>Type:</b>{each.type}<br/>
+                            <ul>
+                                {each.urls.map(url => 
+                                    <li><a className="listLink" key={url} href={url}><p>{url}</p></a></li>
+                                )}
+                            </ul>
                         </li>
                     )}
                     </ol>
