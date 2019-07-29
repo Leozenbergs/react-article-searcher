@@ -3,7 +3,7 @@ import './main.css';
 import axios from 'axios';
 import Pagination from "react-js-pagination";
 
-// https://core.ac.uk:443/api-v2/search/city?page=1&pageSize=10&apiKey=f2W8igzCQvP6V0cpnGAh73uEb5tFNKrY
+// https://core.ac.uk:443/api-v2/search/city?page=1&pageSize=15&apiKey=f2W8igzCQvP6V0cpnGAh73uEb5tFNKrY
 
 
 
