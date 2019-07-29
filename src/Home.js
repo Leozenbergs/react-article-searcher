@@ -10,8 +10,8 @@ export default function Home(){
     return (
         <React.Fragment>
             <CssBaseline />
-            <Container maxWidth="sm">                
-                <h2 className="text-center">Home</h2>
+            <Container maxWidth="md">                
+                <h2 className="text-center">Search articles</h2>
                 <hr className="titleLine" />
                 <Form />
             </Container>

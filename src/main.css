@@ -1,6 +1,18 @@
 button, input{
     outline: none;
 }
+.r15{
+    right: 15px;
+}
+.t15{
+    top: 15px;
+}
+.relative{
+    position: relative;
+}
+.absolute{
+    position: absolute;
+}
 .pointer{
     cursor: pointer;
 }
@@ -31,6 +43,9 @@ button, input{
     justify-content: center !important;
     flex-direction: column !important;
 }
+.float-right{
+    float: right;
+}
 .text-left{
     text-align:left;
 }
@@ -57,4 +72,34 @@ a:not(.listLink){text-decoration:none !important; color: #333;}
     color: #fff;
     font-size: 18px;
     padding: 7px 10px;
+}
+#results ol {
+    list-style: none;
+}
+.pagination{
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.result--item{
+    background: #fff;
+    box-shadow: 0px 1px 5px 0px #ccc;
+    margin-top: 30px;
+    padding: 30px
+}
+.pagination li{
+    padding: 10px
+}
+.pagination li.active, .pagination li.active a{
+    background: #313cb5;
+    color: #fff;
+}
+.fav{
+    color: #fff;
+    display: none;
+}
+.result--item:hover .fav{
+    display: block;
+    color: #333;
 }
