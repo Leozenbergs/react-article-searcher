@@ -15,15 +15,26 @@ class Form extends Component {
         this.handlePageChange = this.handlePageChange.bind(this);
         this.handleFavs = this.handleFavs.bind(this);
         this.state = {
-            pesquisa: '',
             result: [],
-            activePage: 1
+            activePage: 1,
+            page: [],
+            fav: []
         }
     }
 
-    handlePageChange(pageNumber) {
-        console.log(`active page is ${pageNumber}`);
-        this.setState({activePage: pageNumber});
+    handlePageChange(pageNumber, itemsPerPage) {  
+        // let aux = [];
+        let item = this.state.result;
+        // for(let i = pageNumber-1; i<itemsPerPage; i++){
+        //     aux.push(item[i]);
+        // }
+        // console.log(item.slice(pageNumber-1, itemsPerPage));
+        let mult = (parseInt(pageNumber)*itemsPerPage)-itemsPerPage;
+        this.setState({
+            activePage: pageNumber,
+            page: item.slice(mult, itemsPerPage)
+        });
+        this.forceUpdate();
     }
 
     handleFavs (e, id, title){
@@ -38,23 +49,49 @@ class Form extends Component {
     }
     
     handleSubmit = () => {
-        let res = [];
-        this.setState({pesquisa: document.getElementById('query').value}); 
-        axios.get(`https://core.ac.uk:443/api-v2/search/${this.pesquisa}?page=1&pageSize=10&apiKey=f2W8igzCQvP6V0cpnGAh73uEb5tFNKrY`)
-        .then((response) => {
-            response.data.data.forEach((each)=> {
-                // console.log(each);
-                res.push({id: each._source.id, title: each._source.title, author: each._source.authors, type: each._type, description: each._source.description, urls: each._source.urls});                
-            });
-            this.setState({
-                result: res
-            });
-        } );
+        try{
+            let res = [];
+            let query = document.getElementById('query').value;
+            axios.get(`https://core.ac.uk:443/api-v2/search/${query}?page=1&pageSize=10&apiKey=f2W8igzCQvP6V0cpnGAh73uEb5tFNKrY`)
+            .then((response) => {
+                response.data.data.forEach((each)=> {
+                    res.push({id: each._source.id, title: each._source.title, author: each._source.authors, type: each._type, description: each._source.description, urls: each._source.urls});                
+                });
+                this.setState({
+                    result: res
+                });
+
+                let aux = [];
+                Object.keys(localStorage).map(each=>{
+                    aux.push(each);
+                });
+                this.setState({
+                    fav: aux
+                });
+
+                this.state.result.map((each, i)=>{
+                    if(each.title == this.state.fav[i]){
+                        document.querySelector('.result--item').classList.add('active');
+                    }
+                });
+
+            } );
+
+            
+
+        }catch(e){
+            console.log(e)
+        }
+        
         
     }
 
-    render(){
 
+    render(){
+        if(this.state.page.length > 0){
+            let page = this.state.page;
+            this.state.result = page;
+        }
         return (
             <div className="text-center mt-30">
                 <form className="commentForm flex-center" >
@@ -71,7 +108,7 @@ class Form extends Component {
                     {this.state.result.map((each)=>
                         <li className="text-left result--item" onClick={(e) => this.handleFavs(e, each.title, each.title)} key={each.id}>
                             <div className="fav r15 float-right relative t0"><i class="far fa-heart"></i></div>
-                            <b>Title:</b>{each.title}<br/>
+                            <b>Title:</b><span className="title">{each.title}</span><br/>
                             <b>Description:</b>{each.description}<br/>
                             <b>Authors:</b>{each.author}<br/>
                             <b>Type:</b>{each.type}<br/>
@@ -86,13 +123,13 @@ class Form extends Component {
                     {this.state.result.length > 0?
                         <div>                       
                             <hr />
-                            <Pagination
+                            {/* <Pagination
                                 activePage={this.state.activePage}
                                 itemsCountPerPage={5}
-                                totalItemsCount={this.state.result.length}
-                                pageRangeDisplayed={1}
-                                onChange={this.handlePageChange}
-                            />
+                                totalItemsCount={100}
+                                pageRangeDisplayed={2}
+                                onChange={(e)=>this.handlePageChange(e, 5)}
+                            /> */}
                             
                         </div>
                         : ''
